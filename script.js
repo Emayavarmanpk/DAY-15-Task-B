@@ -1,109 +1,124 @@
-var div1 = create('div', 'container-fluid mt-5 ml-5 p-5');
+var div5 = document.createElement("div");
+div5.setAttribute("class","calculator");
 
-let bg = document.querySelector('body');
+div5.innerHTML=`<input type="text" placeholder="0" id="result">`;
 
+var button1 = document.createElement("button");
+button1.setAttribute("id","clear");
+button1.setAttribute("onclick","Clear()");
+button1.innerHTML='C';
+div5.append(button1);
+var button2 = document.createElement("button");
+button2.setAttribute("id","delete");
+button2.setAttribute("onclick","del()");
+button2.innerHTML="-";
+div5.append(button2);
+var button3 = document.createElement("button");
+button3.setAttribute("id","modu");
+button3.setAttribute("onclick","display('%')");
+button3.innerHTML="%";
+div5.append(button3);
+var button4 = document.createElement("button");
+button4.setAttribute("id","divi");
+button4.setAttribute("onclick","display('/')");
+button4.innerHTML="/";
+div5.append(button4);
+var button5 = document.createElement("button");
+button5.setAttribute("id","7");
+button5.setAttribute("onclick","display('7')");
+button5.innerHTML="7";
+div5.append(button5);
+var button6 = document.createElement("button");
+button6.setAttribute("id","8");
+button6.setAttribute("onclick","display('8')");
+button6.innerHTML="8";
+div5.append(button6);
+var button7 = document.createElement("button");
+button7.setAttribute("id","9");
+button7.setAttribute("onclick","display('9')");
+button7.innerHTML="9";
+div5.append(button7);
+var button8 = document.createElement("button");
+button8.setAttribute("id","multiple");
+button8.setAttribute("onclick","display('*')");
+button8.innerHTML="*";
+div5.append(button8);
+var button9 = document.createElement("button");
+button9.setAttribute("id","4");
+button9.setAttribute("onclick","display('4')");
+button9.innerHTML="4";
+div5.append(button9);
+var button10 = document.createElement("button");
+button10.setAttribute("id","5");
+button10.setAttribute("onclick","display('5')");
+button10.innerHTML="5";
+div5.append(button10);
+var button11 = document.createElement("button");
+button11.setAttribute("id","6");
+button11.setAttribute("onclick","display('6')");
+button11.innerHTML="6";
+div5.append(button11);
+var button12 = document.createElement("button");
+button12.setAttribute("id","subtract");
+button12.setAttribute("onclick","display('-')");
+button12.innerHTML="-";
+div5.append(button12);
+var button13 = document.createElement("button");
+button13.setAttribute("id","1");
+button13.setAttribute("onclick","display('1')");
+button13.innerHTML="1";
+div5.append(button13);
+var button14 = document.createElement("button");
+button14.setAttribute("id","2");
+button14.setAttribute("onclick","display('2')");
+button14.innerHTML="2";
+div5.append(button14);
+var button15 = document.createElement("button");
+button15.setAttribute("id","3");
+button15.setAttribute("onclick","display('3')");
+button15.innerHTML="3";
+div5.append(button15);
+var button16 = document.createElement("button");
+button16.setAttribute("id","add");
+button16.setAttribute("onclick","display('+')");
+button16.innerHTML="+";
+div5.append(button16);
+var button17 = document.createElement("button");
+button17.setAttribute("id","0");
+button17.setAttribute("onclick","display('.')");
+button17.innerHTML=".";
+div5.append(button17);
+var button18 = document.createElement("button");
+button18.setAttribute("id","a");
+button18.setAttribute("onclick","display('0')");
+button18.innerHTML="0";
+div5.append(button18);
+var button19 = document.createElement("button");
+button19.setAttribute("id","equal");
+button19.setAttribute("onclick","Calculate()");
+button19.setAttribute("class","equal")
+button19.innerHTML="=";
+div5.append(button19);
 
-var divarr = createElements('div', 'offset-md-2 offset-sm-1 row text-md-center text-sm-left h4 mb-0', 6);
+document.getElementById("div3").append(div5);
 
-var input = create('input', 'col-8 border-3 border-light text-right mt-5 mb-1');
-input.setAttribute('type', 'text');
-input.disabled = true;
-input.setAttribute('style', `line-height:60px; background-color:#DAE0E2; font-family: 'Comfortaa', cursive;`);
-input.id = "display";
+let output= document.getElementById("result");
 
-var btnnumbers = createElements('button', 'btn-fluid btn-dark text-md-center text-sm-left text-xs-left p-md-3 p-sm-4 p-xs-4 col-2', 10);
-btnnumbers[0].setAttribute('onclick', "appendNumber(0)");
-btnnumbers[1].setAttribute('onclick', `appendNumber(1)`);
-btnnumbers[2].setAttribute('onclick', `appendNumber(2)`);
-btnnumbers[3].setAttribute('onclick', `appendNumber(3)`);
-btnnumbers[4].setAttribute('onclick', `appendNumber(4)`);
-btnnumbers[5].setAttribute('onclick', `appendNumber(5)`);
-btnnumbers[6].setAttribute('onclick', `appendNumber(6)`);
-btnnumbers[7].setAttribute('onclick', `appendNumber(7)`);
-btnnumbers[8].setAttribute('onclick', `appendNumber(8)`);
-btnnumbers[9].setAttribute('onclick', `appendNumber(9)`);
+function display(num){
 
-var add = createButton('+', '+', `appendNumber('+')`);
-var sub = createButton('-', '-', `appendNumber('-')`);
-var mul = createButton('x', 'X', `appendNumber('*')`);
-var division = createButton('&#247;', '/', `appendNumber('/')`);
-var square = createButton('x<sup>2</sup>', 'square', 'power2()')
-var equals = createButton('=', '=', 'equate()');
-var root = createButton('&radic;', 'root', 'sqrRoot()');
-var dot = createButton('.', '.', `appendNumber('.')`);
-var clear = createButton('c', 'c', 'clearScreen()');
-var cube = createButton('x<sup>3</sup>', 'cube', 'power3()')
-
-document.body.append(div1);
-div1.append(divarr[0], divarr[1], divarr[2], divarr[3], divarr[4], divarr[5]);
-divarr[0].append(input);
-divarr[1].append(square, root, clear, division);
-divarr[2].append(btnnumbers[7], btnnumbers[8], btnnumbers[9], mul);
-divarr[3].append(btnnumbers[4], btnnumbers[5], btnnumbers[6], sub);
-divarr[4].append(btnnumbers[1], btnnumbers[2], btnnumbers[3], add);
-divarr[5].append(cube, btnnumbers[0], dot, equals);
-
-function create(element, classname) {
-    var t = document.createElement(element);
-    t.setAttribute('class', classname);
-    return t;
+    output.value += num;
 }
-
-function createElements(element, classname, num) {
-    let elem = [];
-    for (let i = 0; i < num; i++) {
-        var b = document.createElement(element);
-        b.setAttribute('class', classname);
-        b.setAttribute('style', `font-family: 'Comfortaa', cursive;`);
-        if (element === 'button') {
-            b.setAttribute('value', i);
-            b.innerHTML = i;
-        }
-        elem.push(b);
+function Calculate(){
+    try{
+        output.value =eval (output.value);
     }
-    return elem;
-}
-
-function createButton(txt, val, fn) {
-    let a = document.createElement('button');
-    a.setAttribute('class', 'btn-fluid btn-dark text-md-center text-sm-left text-xs-left p-md-3 p-sm-4 p-xs-4 col-2');
-    a.setAttribute('value', val);
-    a.innerHTML = txt;
-    a.setAttribute('onclick', fn);
-    return a;
-}
-
-
-function appendNumber(val) {
-    input.value += val;
-}
-
-
-function equate() {
-    input.value = Number.isInteger(eval(input.value)) ? eval(input.value) : eval(input.value).toFixed(2);
-}
-
-function sqrRoot() {
-    if (input.value) {
-        let val = parseFloat(eval(input.value))
-        input.value = Math.sqrt(val).toFixed(2);
+    catch(err){
+        alert("Only numbers are allowed");
     }
 }
-
-function power3() {
-    if (input.value) {
-        let val = parseFloat(eval(input.value))
-        input.value = Math.pow(val, 3).toFixed(2);
-    }
+function Clear(){
+    output.value="";
 }
-
-function power2() {
-    if (input.value) {
-        let val = parseFloat(eval(input.value))
-        input.value = Math.pow(val, 2).toFixed(2);
-    }
-}
-
-function clearScreen() {
-    input.value = "";
+function del(){
+    output.value=output.value.slice(0,-1);
 }
